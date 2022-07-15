@@ -128,10 +128,10 @@ alert( user?.address.street ); // undefined
 ```
 
 ````warn header="`?.` 前的变量必须已声明"
-如果未声明变量 `user`，那么 `user?.anything` 会触发一个错误：
+如果未声明变量 `user`，那么 `user?.anything` 会返回 undefined：
 
 ```js run
-// ReferenceError: user is not defined
+// undefined
 user?.address;
 ```
 `?.` 前的变量必须已声明（例如 `let/const/var user` 或作为一个函数参数）。可选链仅适用于已声明的变量。
@@ -176,13 +176,13 @@ userAdmin.admin?.(); // I am admin
 */!*
 
 *!*
-userGuest.admin?.(); // 啥都没发生（没有这样的方法）
+userGuest.admin?.(); // 返回 undefined（没有这样的方法）
 */!*
 ```
 
 在这两行代码中，我们首先使用点符号（`userAdmin.admin`）来获取 `admin` 属性，因为我们假定对象 `userAdmin` 存在，因此可以安全地读取它。
 
-然后 `?.()` 会检查它左边的部分：如果 `admin` 函数存在，那么就调用运行它（对于 `userAdmin`）。否则（对于 `userGuest`）运算停止，没有报错。
+然后 `?.()` 会检查它左边的部分：如果 `admin` 函数存在，那么就调用运行它（对于 `userAdmin`）。否则（对于 `userGuest`）返回 undefined。
 
 如果我们想使用方括号 `[]` 而不是点符号 `.` 来访问属性，语法 `?.[]` 也可以使用。跟前面的例子类似，它允许从一个可能不存在的对象上安全地读取属性。
 
